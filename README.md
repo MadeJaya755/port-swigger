@@ -19,6 +19,8 @@ Memeriksa kontrol akses dengan permintaan yang dimodifikasi (mis. meminta resour
 
 Mencatat kesalahan konfigurasi dan rekomendasi mitigasi.
 
+
+
 2. Clickjacking (clickjacking.jpg)
 
 Isi kelas:
@@ -36,6 +38,8 @@ Membuat demonstrasi proof-of-concept halaman yang meng-overlay elemen target.
 Menguji efek interaksi user pada elemen tersembunyi.
 
 Merekomendasikan perbaikan konfigurasi header.
+
+
 
 3. Path Traversal (path tranversal.jpg)
 
@@ -55,6 +59,8 @@ Menganalisis sanitasi input server dan bagaimana ia gagal.
 
 Menyusun saran mitigasi (whitelisting path, canonicalization).
 
+
+
 4. Server-Side Template Injection (SSTI) (server-side.jpg)
 
 Isi kelas:
@@ -72,6 +78,8 @@ Menilai output yang dihasilkan untuk melihat eksekusi template.
 Mengeksplorasi tingkat kerentanan (informasi leak vs RCE).
 
 Merekomendasikan pencegahan (escape output, disable eval di template).
+
+
 
 5. SQL Injection (sql injaction.jpg)
 
@@ -91,6 +99,8 @@ Menilai tingkat akses yang bisa diperoleh (baca data, bypass auth).
 
 Menyarankan mitigasi (prepared statements, parameterized queries).
 
+
+
 6. Web LLM Attacks (web LLM attacks.jpg)
 
 Isi kelas:
@@ -108,6 +118,8 @@ Menyusun contoh prompt injection untuk melihat bagaimana model merespon instruks
 Menilai kontrol yang kurang (mis. tidak memfilter prompt, langsung mengeksekusi output).
 
 Merekomendasikan mitigasi (sanitasi prompt, rate limiting, human-in-the-loop).
+
+
 
 7. WebSockets (web sockets.jpg)
 
