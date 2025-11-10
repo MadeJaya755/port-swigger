@@ -1,140 +1,47 @@
-Dokumentasi Kelas PortSwigger
-1. API Testing (api tasting.jpg)
+PortSwigger Academy — Dokumentasi Kelas
 
-Isi kelas:
+Repositori ini berisi bukti penyelesaian dan ringkasan praktikal dari beberapa lab di PortSwigger Web Security Academy.
+Setiap entri menjelaskan apa isi kelasnya dan apa yang dilakukan selama latihan — fokus pada temuan, teknik pengujian, dan rekomendasi mitigasi.
 
-Konsep keamanan API: otorisasi, autentikasi, access control, dan parameter handling.
+Daftar Kelas
+1. API Testing
 
-Tipe celah umum pada API: IDOR, broken object-level authorization, excessive data exposure, dan insecure direct object references.
 
-Cara kerja endpoint, header, dan response JSON.
+Isi kelas: Keamanan API modern — autentikasi/otorisasi, kontrol akses objek, parameter tampering, dan ekspos data berlebih.
+Yang dilakukan: Menganalisis endpoint dan payload JSON, mengubah parameter (ID/token) untuk mencari IDOR, menguji kontrol akses dengan permintaan ter-manipulasi, dan mendokumentasikan titik lemah beserta rekomendasi perbaikan.
 
-Kegiatan di kelas:
+2. Clickjacking
 
-Menganalisis request/response API untuk menemukan parameter sensitif.
 
-Menguji perubahan nilai parameter (ID, token) untuk mendeteksi IDOR.
+Isi kelas: Teknik clickjacking dan proteksi header (mis. X-Frame-Options, Content-Security-Policy frame-ancestors).
+Yang dilakukan: Mencari halaman yang dapat di-embed tanpa proteksi, membuat proof-of-concept halaman overlay untuk demonstrasi, dan merekomendasikan header/policy yang harus diterapkan.
 
-Memeriksa kontrol akses dengan permintaan yang dimodifikasi (mis. meminta resource user lain).
+3. Path Traversal
 
-Mencatat kesalahan konfigurasi dan rekomendasi mitigasi.
 
+Isi kelas: Cara kerja path traversal (../, encoding) dan teknik bypass filter.
+Yang dilakukan: Mengidentifikasi endpoint yang membangun path dari input user, menguji payload traversal untuk baca file sensitif, menganalisis mekanisme sanitasi, dan menyusun mitigasi (canonicalization + whitelist).
 
+4. Server-Side Template Injection (SSTI)
 
-2. Clickjacking (clickjacking.jpg)
 
-Isi kelas:
+Isi kelas: Risiko injeksi pada template engine (Jinja2, Twig, dll.) — dari info leak sampai RCE.
+Yang dilakukan: Menguji input pada rendering template, mendeteksi eksekusi ekspresi template, mengevaluasi potensi eskalasi (RCE), dan rekomendasi mitigasi seperti escaping dan membatasi fitur engine.
 
-Prinsip clickjacking: memanipulasi UI dengan frame tersembunyi untuk membuat pengguna melakukan tindakan tanpa sadar.
+5. SQL Injection
 
-Header dan kebijakan proteksi: X-Frame-Options dan Content-Security-Policy (frame-ancestors).
 
-Kegiatan di kelas:
+Isi kelas: Dasar-dasar SQLi (boolean/time/union/error) dan dampaknya pada integritas data.
+Yang dilakukan: Menemukan input yang dipakai pada query, menguji payload injeksi untuk mengakses/mengekstrak data, menilai skop eksfiltrasi, dan merekomendasikan parameterized queries/prepared statements.
 
-Mencari target yang bisa di-embed tanpa header proteksi.
+6. Web LLM Attacks
 
-Membuat demonstrasi proof-of-concept halaman yang meng-overlay elemen target.
 
-Menguji efek interaksi user pada elemen tersembunyi.
+Isi kelas: Vektor serangan terhadap aplikasi yang memakai Large Language Models — prompt injection, data exfiltration, dan output-driven actions.
+Yang dilakukan: Memetakan aliran data ke/dari model, menguji prompt injection untuk melihat perilaku model, menilai risiko eksekusi otomatis dari output model, dan merekomendasikan sanitasi prompt serta kontrol operasional.
 
-Merekomendasikan perbaikan konfigurasi header.
+7. WebSockets
 
 
-
-3. Path Traversal (path tranversal.jpg)
-
-Isi kelas:
-
-Mekanisme path traversal: penggunaan ../ atau encoding untuk mengakses file di luar direktori yang diizinkan.
-
-Teknik bypass filter sederhana dengan encoding atau variasi path.
-
-Kegiatan di kelas:
-
-Mengidentifikasi endpoint yang menerima path/file dari input user.
-
-Mencoba payload traversal untuk membaca file sensitif (mis. konfigurasi, credential).
-
-Menganalisis sanitasi input server dan bagaimana ia gagal.
-
-Menyusun saran mitigasi (whitelisting path, canonicalization).
-
-
-
-4. Server-Side Template Injection (SSTI) (server-side.jpg)
-
-Isi kelas:
-
-Konsep SSTI: input user disuntikkan langsung ke engine template server (Jinja2, Twig, dll).
-
-Dampak: dari disclosure data hingga remote code execution tergantung engine.
-
-Kegiatan di kelas:
-
-Mendeteksi apakah input diproses oleh template engine (payload tes sederhana).
-
-Menilai output yang dihasilkan untuk melihat eksekusi template.
-
-Mengeksplorasi tingkat kerentanan (informasi leak vs RCE).
-
-Merekomendasikan pencegahan (escape output, disable eval di template).
-
-
-
-5. SQL Injection (sql injaction.jpg)
-
-Isi kelas:
-
-Dasar-dasar SQLi: bagaimana input user bisa memodifikasi query database.
-
-Variasi SQLi: boolean-based, time-based, union-based, error-based.
-
-Kegiatan di kelas:
-
-Menemukan input yang dipakai langsung dalam query SQL.
-
-Menguji payload injeksi untuk melihat perubahan hasil respons.
-
-Menilai tingkat akses yang bisa diperoleh (baca data, bypass auth).
-
-Menyarankan mitigasi (prepared statements, parameterized queries).
-
-
-
-6. Web LLM Attacks (web LLM attacks.jpg)
-
-Isi kelas:
-
-Risiko integrasi LLM: prompt injection, data exfiltration, dan output-driven actions.
-
-Vektor serangan pada aplikasi yang mem-forward input ke model.
-
-Kegiatan di kelas:
-
-Memahami jalur data dari user → server → model → aplikasi.
-
-Menyusun contoh prompt injection untuk melihat bagaimana model merespon instruksi berbahaya.
-
-Menilai kontrol yang kurang (mis. tidak memfilter prompt, langsung mengeksekusi output).
-
-Merekomendasikan mitigasi (sanitasi prompt, rate limiting, human-in-the-loop).
-
-
-
-7. WebSockets (web sockets.jpg)
-
-Isi kelas:
-
-Karakteristik WebSocket: koneksi persistent, pesan event-driven, handshake spesifik.
-
-Risiko: autentikasi lemah, replay/forgery, dan ekspos data real-time.
-
-Kegiatan di kelas:
-
-Memantau handshake dan pesan WebSocket untuk menemukan token/session yang bocor.
-
-Menguji manipulasi pesan untuk memicu aksi tak diinginkan di server.
-
-Mengecek apakah server memvalidasi setiap event dan sumbernya.
-
-Menyusun rekomendasi (validasi sisi server, penggunaan WSS, token scoping).
+Isi kelas: Karakteristik WebSocket, handshake, dan risiko real-time (token leak, replay, message forgery).
+Yang dilakukan: Memantau handshake dan pesan WebSocket untuk menemukan kebocoran token/session, memanipulasi pesan untuk menguji validasi server, dan menyusun mitigasi (WSS, validasi server-side setiap event, scoping token).
